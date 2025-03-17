@@ -1,0 +1,53 @@
+-- Geração de Modelo físico
+-- Sql ANSI 2003 - brModelo.
+
+
+
+CREATE TABLE cliente (
+telefone INT,
+cpf INT,
+email VARCHAR(24),
+dataNasc DATE,
+nome VARCHAR(24),
+cep INT,
+bairro VARCHAR(24),
+compl VARCHAR(200),
+num INT,
+cidade VARCHAR(24),
+estado VARCHAR(2),
+rg VARCHAR(11),
+rua VARCHAR(100),
+id_cliente INT PRIMARY KEY
+)
+
+CREATE TABLE porte (
+id_carro INT PRIMARY KEY,
+placa VARCHAR(7),
+marca VARCHAR(24),
+modelo VARCHAR(24),
+cor VARCHAR(24),
+porte VARCHAR(10),
+chassi VARCHAR(24),
+id_cliente INT,
+FOREIGN KEY(id_cliente) REFERENCES cliente (id_cliente)
+)
+
+CREATE TABLE ocorrencia (
+id_ocorrencia INT PRIMARY KEY,
+data DATE,
+hora TIME,
+rua VARCHAR(100),
+bairro VARCHAR(24),
+cidade VARCHAR(24),
+descricao VARCHAR(300),
+id_carro INT,
+id_tipo Texto(1),
+FOREIGN KEY(id_carro) REFERENCES porte (id_carro)
+)
+
+CREATE TABLE tipo (
+id_tipo Texto(1) PRIMARY KEY,
+tipo VARCHAR(24)
+)
+
+ALTER TABLE ocorrencia ADD FOREIGN KEY(id_tipo) REFERENCES tipo (id_tipo)
