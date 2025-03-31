@@ -1,0 +1,74 @@
+-- Geração de Modelo físico
+-- Sql ANSI 2003 - brModelo.
+
+
+
+CREATE TABLE autor (
+id_autor INT PRIMARY KEY,
+nome VARCHAR(255),
+nacionalidade Texto(1)
+)
+
+CREATE TABLE cliente (
+id_cliente INT PRIMARY KEY,
+nome VARCHAR(255),
+data_nasci DATE,
+ativo BIT(1),
+data_cadastro DATE,
+id_endereco INT,
+id_telefone INT
+)
+
+CREATE TABLE endereco (
+id_endereco INT PRIMARY KEY,
+rua VARCHAR(255),
+numero VARCHAR(10),
+bairro VARCHAR(100),
+cidade VARCHAR(100),
+cep VARCHAR(8),
+cliente_id INT
+)
+
+CREATE TABLE telefone (
+id_telefone INT PRIMARY KEY,
+numero_whatsapp VARCHAR(15),
+cliente_id INT,
+telefone_fixo VARCHAR(15),
+numero_celular VARCHAR(15)
+)
+
+CREATE TABLE venda+item_venda (
+id_venda INT,
+cliente_id INT,
+data_venda DATETIME,
+valor_total DECIMAL(10,2),
+id_cliente INT,
+id_item INT,
+venda_id INT,
+livro_id INT,
+qnt INT,
+preco_unit DECIMAL(10,2),
+PRIMARY KEY(id_venda,id_item),
+FOREIGN KEY(id_cliente) REFERENCES cliente (id_cliente)
+)
+
+CREATE TABLE possui (
+id_autor INT,
+id_livro INT,
+FOREIGN KEY(id_autor) REFERENCES autor (id_autor)
+)
+
+CREATE TABLE livro (
+id_livro INT PRIMARY KEY,
+nome VARCHAR(255),
+preco DECIMAL(10,2),
+data_publicacao DATE,
+sinopse TEXT,
+idioma VARCHAR(50),
+id_venda INT,
+FOREIGN KEY(/*erro: ??*/) REFERENCES venda+item_venda (id_venda,id_item)
+)
+
+ALTER TABLE cliente ADD FOREIGN KEY(id_endereco) REFERENCES endereco (id_endereco)
+ALTER TABLE cliente ADD FOREIGN KEY(id_telefone) REFERENCES telefone (id_telefone)
+ALTER TABLE possui ADD FOREIGN KEY(id_livro) REFERENCES livro (id_livro)
