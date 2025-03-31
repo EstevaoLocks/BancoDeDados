@@ -1,0 +1,81 @@
+-- Geração de Modelo físico
+-- Sql ANSI 2003 - brModelo.
+
+
+
+CREATE TABLE endereco (
+cidade Texto(1),
+cep Texto(1),
+complemento Texto(1),
+codendereco Texto(1) PRIMARY KEY,
+uf Texto(1),
+num Texto(1),
+rua Texto(1),
+bairro Texto(1)
+)
+
+CREATE TABLE proprietario (
+telefone Texto(1),
+email Texto(1),
+datacadastro Texto(1),
+nome Texto(1),
+codpro Texto(1) PRIMARY KEY,
+cpf Texto(1),
+codcorr Texto(1)
+)
+
+CREATE TABLE corretor (
+nome Texto(1),
+cpf Texto(1),
+datacontratado Texto(1),
+datanasc Texto(1),
+horastrabalhadas Texto(1),
+escala Texto(1),
+telefone Texto(1),
+codcorr Texto(1) PRIMARY KEY,
+email Texto(1),
+imoveisresponsavel Texto(1),
+codendereco Texto(1),
+FOREIGN KEY(codendereco) REFERENCES endereco (codendereco)
+)
+
+CREATE TABLE inquilino (
+historico Texto(1),
+nome Texto(1),
+cpf Texto(1),
+codinq Texto(1) PRIMARY KEY,
+telefone Texto(1),
+datacontrato Texto(1),
+email Texto(1),
+codcorr Texto(1),
+FOREIGN KEY(codcorr) REFERENCES corretor (codcorr)
+)
+
+CREATE TABLE imovel (
+codimovel Texto(1) PRIMARY KEY,
+qntcomodos Texto(1),
+qntbanheiros Texto(1),
+qntquartos Texto(1),
+qntsuites Texto(1),
+qntsalas Texto(1),
+qntandares Texto(1),
+qntescadas Texto(1),
+areamquad Texto(1),
+codendereco Texto(1),
+codpro Texto(1),
+FOREIGN KEY(codendereco) REFERENCES endereco (codendereco),
+FOREIGN KEY(codpro) REFERENCES proprietario (codpro)
+)
+
+CREATE TABLE aluga (
+codaluguel Texto(1) PRIMARY KEY,
+valor Texto(1),
+dataaluguel Texto(1),
+tempocontrato Texto(1),
+tipocontrato Texto(1),
+codimovel Texto(1),
+codinq Texto(1),
+FOREIGN KEY(codimovel) REFERENCES imovel (codimovel)/*falha: chave estrangeira*/
+)
+
+ALTER TABLE proprietario ADD FOREIGN KEY(codcorr) REFERENCES corretor (codcorr)
