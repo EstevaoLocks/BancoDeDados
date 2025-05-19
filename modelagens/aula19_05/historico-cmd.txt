@@ -1,0 +1,238 @@
+Created By Estevão
+
+Histórico CMD:
+
+MariaDB [etecmcm2]> insert into produto (nome_produto, preco_produto, marca_produto, fk_categorias_id_categoria) value
+    -> ('Presunto Parma',200,28.90,'Seara')
+    -> ;
+ERROR 1452 (23000): Cannot add or update a child row: a foreign key constraint fails (`etecmcm2`.`produto`, CONSTRAINT `FK_produto_2` FOREIGN KEY (`fk_categorias_id_categoria`) REFERENCES `categorias` (`id_categoria`))
+MariaDB [etecmcm2]> insert into produto (nome_produto, preco_produto, marca_produto, fk_categorias_id_categoria) value
+    -> ('Presunto Parma',200,28.90,'Seara',3)
+    -> ('Alcatra', 1,35.90,'Friboi',5);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '('Alcatra', 1,35.90,'Friboi',5)' at line 3
+MariaDB [etecmcm2]> insert into produto (nome_produto, preco_produto, marca_produto, fk_categorias_id_categoria) value
+    -> ('Presunto Parma',200,28.90,'Seara',3)
+    -> ('Alcatra',1,35.90,'Friboi',5);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '('Alcatra',1,35.90,'Friboi',5)' at line 3
+MariaDB [etecmcm2]> insert into produto (nome_produto, preco_produto, marca_produto, fk_categorias_id_categoria) value
+    -> ('Presunto Parma',200,28.90,'Seara',3);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [etecmcm2]> insert into produto (nome_produto, preco_produto, marca_produto, fk_categorias_id_categoria) value
+    -> ('Alcatra',1,35.90,'Friboi',5);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [etecmcm2]> select * from produto;
++------------+-------------------------+--------------+---------------+---------------+----------------------------+
+| id_produto | nome_produto            | qtde_produto | preco_produto | marca_produto | fk_categorias_id_categoria |
++------------+-------------------------+--------------+---------------+---------------+----------------------------+
+|          1 | Sabão em pó             |            3 |         25.00 | OMO           |                          2 |
+|          2 | Queijo mussarela        |           10 |         32.00 | Presidente    |                          1 |
+|          4 | Iogurte Natural         |          124 |          3.79 | Vigor         |                          1 |
+|          5 | Milho Verde em Conserva |          142 |          3.29 | Quero         |                          4 |
++------------+-------------------------+--------------+---------------+---------------+----------------------------+
+4 rows in set (0.000 sec)
+
+MariaDB [etecmcm2]> insert into produto (nome_produto, qtde_produto, preco_produto, marca_produto, fk_categorias_id_categoria) value
+    -> ('Presunto Parma',200,28.90,'Seara',3);
+Query OK, 1 row affected (0.007 sec)
+
+MariaDB [etecmcm2]> insert into produto (nome_produto, preco_produto, marca_produto, fk_categorias_id_categoria) value
+    -> ('Alcatra',1,35.90,'Friboi',5);
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [etecmcm2]> insert into produto (nome_produto, qtde_produto, preco_produto, marca_produto, fk_categorias_id_categoria) value
+    -> ('Alcatra',1,35.90,'Friboi',5);
+Query OK, 1 row affected (0.008 sec)
+
+MariaDB [etecmcm2]> select * from produto
+    -> ;
++------------+-------------------------+--------------+---------------+---------------+----------------------------+
+| id_produto | nome_produto            | qtde_produto | preco_produto | marca_produto | fk_categorias_id_categoria |
++------------+-------------------------+--------------+---------------+---------------+----------------------------+
+|          1 | Sabão em pó             |            3 |         25.00 | OMO           |                          2 |
+|          2 | Queijo mussarela        |           10 |         32.00 | Presidente    |                          1 |
+|          4 | Iogurte Natural         |          124 |          3.79 | Vigor         |                          1 |
+|          5 | Milho Verde em Conserva |          142 |          3.29 | Quero         |                          4 |
+|          7 | Presunto Parma          |          200 |         28.90 | Seara         |                          3 |
+|          8 | Alcatra                 |            1 |         35.90 | Friboi        |                          5 |
++------------+-------------------------+--------------+---------------+---------------+----------------------------+
+6 rows in set (0.000 sec)
+
+MariaDB [etecmcm2]> ALTER TABLE produtos ADD unidade_medida DATE;
+ERROR 1146 (42S02): Table 'etecmcm2.produtos' doesn't exist
+Histórico CMD:
+
+
+
+
+MariaDB [etecmcm2]> ALTER TABLE produto ADD unidade_medida DATE;
+Query OK, 0 rows affected (0.014 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [etecmcm2]> update produto set unidade_medida = 'un' where id_produto = 1;
+Query OK, 1 row affected, 1 warning (0.004 sec)
+Rows matched: 1  Changed: 1  Warnings: 1
+
+MariaDB [etecmcm2]> select * from produto
+    -> ;
++------------+-------------------------+--------------+---------------+---------------+----------------------------+----------------+
+| id_produto | nome_produto            | qtde_produto | preco_produto | marca_produto | fk_categorias_id_categoria | unidade_medida |
++------------+-------------------------+--------------+---------------+---------------+----------------------------+----------------+
+|          1 | Sabão em pó             |            3 |         25.00 | OMO           |                          2 | 0000-00-00     |
+|          2 | Queijo mussarela        |           10 |         32.00 | Presidente    |                          1 | NULL           |
+|          4 | Iogurte Natural         |          124 |          3.79 | Vigor         |                          1 | NULL           |
+|          5 | Milho Verde em Conserva |          142 |          3.29 | Quero         |                          4 | NULL           |
+|          7 | Presunto Parma          |          200 |         28.90 | Seara         |                          3 | NULL           |
+|          8 | Alcatra                 |            1 |         35.90 | Friboi        |                          5 | NULL           |
++------------+-------------------------+--------------+---------------+---------------+----------------------------+----------------+
+6 rows in set (0.000 sec)
+
+MariaDB [etecmcm2]> ALTER TABLE produto DROP COLUMN unidade_medida;
+Query OK, 0 rows affected (0.010 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [etecmcm2]> ALTER TABLE produtos ADD unidade_medida varchar(10);
+ERROR 1146 (42S02): Table 'etecmcm2.produtos' doesn't exist
+MariaDB [etecmcm2]> ALTER TABLE produto ADD unidade_medida varchar(10);
+Query OK, 0 rows affected (0.011 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+MariaDB [etecmcm2]> select * from produto;
++------------+-------------------------+--------------+---------------+---------------+----------------------------+----------------+
+| id_produto | nome_produto            | qtde_produto | preco_produto | marca_produto | fk_categorias_id_categoria | unidade_medida |
++------------+-------------------------+--------------+---------------+---------------+----------------------------+----------------+
+|          1 | Sabão em pó             |            3 |         25.00 | OMO           |                          2 | NULL           |
+|          2 | Queijo mussarela        |           10 |         32.00 | Presidente    |                          1 | NULL           |
+|          4 | Iogurte Natural         |          124 |          3.79 | Vigor         |                          1 | NULL           |
+|          5 | Milho Verde em Conserva |          142 |          3.29 | Quero         |                          4 | NULL           |
+|          7 | Presunto Parma          |          200 |         28.90 | Seara         |                          3 | NULL           |
+|          8 | Alcatra                 |            1 |         35.90 | Friboi        |                          5 | NULL           |
++------------+-------------------------+--------------+---------------+---------------+----------------------------+----------------+
+6 rows in set (0.000 sec)
+
+MariaDB [etecmcm2]> update produto set unidade_medida = 'un' where id_produto = 1;
+Query OK, 1 row affected (0.019 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [etecmcm2]> select * from produto;
++------------+-------------------------+--------------+---------------+---------------+----------------------------+----------------+
+| id_produto | nome_produto            | qtde_produto | preco_produto | marca_produto | fk_categorias_id_categoria | unidade_medida |
++------------+-------------------------+--------------+---------------+---------------+----------------------------+----------------+
+|          1 | Sabão em pó             |            3 |         25.00 | OMO           |                          2 | un             |
+|          2 | Queijo mussarela        |           10 |         32.00 | Presidente    |                          1 | NULL           |
+|          4 | Iogurte Natural         |          124 |          3.79 | Vigor         |                          1 | NULL           |
+|          5 | Milho Verde em Conserva |          142 |          3.29 | Quero         |                          4 | NULL           |
+|          7 | Presunto Parma          |          200 |         28.90 | Seara         |                          3 | NULL           |
+|          8 | Alcatra                 |            1 |         35.90 | Friboi        |                          5 | NULL           |
++------------+-------------------------+--------------+---------------+---------------+----------------------------+----------------+
+6 rows in set (0.000 sec)
+
+MariaDB [etecmcm2]> update produto set unidade_medida = 'un' where id_produto = 1;
+Query OK, 0 rows affected (0.000 sec)
+Rows matched: 1  Changed: 0  Warnings: 0
+
+MariaDB [etecmcm2]> update produto set unidade_medida = 'un' where id_produto = 4;
+Query OK, 1 row affected (0.003 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [etecmcm2]> update produto set unidade_medida = 'un' where id_produto = 4;
+
+MariaDB [etecmcm2]> select * from produto;
++------------+-------------------------+--------------+---------------+---------------+----------------------------+----------------+
+| id_produto | nome_produto            | qtde_produto | preco_produto | marca_produto | fk_categorias_id_categoria | unidade_medida |
++------------+-------------------------+--------------+---------------+---------------+----------------------------+----------------+
+|          1 | Sabão em pó             |            3 |         25.00 | OMO           |                          2 | un             |
+|          2 | Queijo mussarela        |           10 |         32.00 | Presidente    |                          1 | kg             |
+|          4 | Iogurte Natural         |          124 |          3.79 | Vigor         |                          1 | un             |
+|          5 | Milho Verde em Conserva |          142 |          3.29 | Quero         |                          4 | un             |
+|          7 | Presunto Parma          |          200 |         28.90 | Seara         |                          3 | kg             |
+|          8 | Alcatra                 |            1 |         35.90 | Friboi        |                          5 | kg             |
++------------+-------------------------+--------------+---------------+---------------+----------------------------+----------------+
+6 rows in set (0.000 sec)
+
+MariaDB [etecmcm2]> select nome_produto, qtde_produto from produto;
++-------------------------+--------------+
+| nome_produto            | qtde_produto |
++-------------------------+--------------+
+| Sabão em pó             |            3 |
+| Queijo mussarela        |           10 |
+| Iogurte Natural         |          124 |
+| Milho Verde em Conserva |          142 |
+| Presunto Parma          |          200 |
+| Alcatra                 |            1 |
++-------------------------+--------------+
+6 rows in set (0.000 sec)
+
+MariaDB [etecmcm2]> select * from produto where marca_produto='Quero';
++------------+-------------------------+--------------+---------------+---------------+----------------------------+----------------+
+| id_produto | nome_produto            | qtde_produto | preco_produto | marca_produto | fk_categorias_id_categoria | unidade_medida |
++------------+-------------------------+--------------+---------------+---------------+----------------------------+----------------+
+|          5 | Milho Verde em Conserva |          142 |          3.29 | Quero         |                          4 | un             |
++------------+-------------------------+--------------+---------------+---------------+----------------------------+----------------+
+1 row in set (0.000 sec)
+
+MariaDB [etecmcm2]> select * from produto where preco_produto > 30.00;
++------------+------------------+--------------+---------------+---------------+----------------------------+----------------+
+| id_produto | nome_produto     | qtde_produto | preco_produto | marca_produto | fk_categorias_id_categoria | unidade_medida |
++------------+------------------+--------------+---------------+---------------+----------------------------+----------------+
+|          2 | Queijo mussarela |           10 |         32.00 | Presidente    |                          1 | kg             |
+|          8 | Alcatra          |            1 |         35.90 | Friboi        |                          5 | kg             |
++------------+------------------+--------------+---------------+---------------+----------------------------+----------------+
+2 rows in set (0.000 sec)
+
+MariaDB [etecmcm2]> select * from produto where qtde_produto <= 10;
++------------+------------------+--------------+---------------+---------------+----------------------------+----------------+
+| id_produto | nome_produto     | qtde_produto | preco_produto | marca_produto | fk_categorias_id_categoria | unidade_medida |
++------------+------------------+--------------+---------------+---------------+----------------------------+----------------+
+|          1 | Sabão em pó      |            3 |         25.00 | OMO           |                          2 | un             |
+|          2 | Queijo mussarela |           10 |         32.00 | Presidente    |                          1 | kg             |
+|          8 | Alcatra          |            1 |         35.90 | Friboi        |                          5 | kg             |
++------------+------------------+--------------+---------------+---------------+----------------------------+----------------+
+3 rows in set (0.000 sec)
+
+MariaDB [etecmcm2]> SELECT nome_produto, preco_produto FROM produto ORDER BY preco_produto ASC LIMIT 5;
++-------------------------+---------------+
+| nome_produto            | preco_produto |
++-------------------------+---------------+
+| Milho Verde em Conserva |          3.29 |
+| Iogurte Natural         |          3.79 |
+| Sabão em pó             |         25.00 |
+| Presunto Parma          |         28.90 |
+| Queijo mussarela        |         32.00 |
++-------------------------+---------------+
+5 rows in set (0.000 sec)
+
+MariaDB [etecmcm2]> SELECT nome_produto, preco_produto FROM produto ORDER BY preco_produto DESC LIMIT 5;
++------------------+---------------+
+| nome_produto     | preco_produto |
++------------------+---------------+
+| Alcatra          |         35.90 |
+| Queijo mussarela |         32.00 |
+| Presunto Parma   |         28.90 |
+| Sabão em pó      |         25.00 |
+| Iogurte Natural  |          3.79 |
++------------------+---------------+
+5 rows in set (0.000 sec)
+
+MariaDB [etecmcm2]> SELECT COUNT(*) AS total_produtos FROM produto;
++----------------+
+| total_produtos |
++----------------+
+|              6 |
++----------------+
+1 row in set (0.000 sec)
+
+MariaDB [etecmcm2]> SELECT AVG(preco_produto) AS preco_medio FROM produto;
++-------------+
+| preco_medio |
++-------------+
+|   21.480000 |
++-------------+
+1 row in set (0.000 sec)
+
+MariaDB [etecmcm2]> SELECT nome_produto, qtde_produto FROM produto ORDER BY qtde_produto DESC LIMIT 1;
++----------------+--------------+
+| nome_produto   | qtde_produto |
++----------------+--------------+
+| Presunto Parma |          200 |
++----------------+--------------+
+1 row in set (0.000 sec)
+
