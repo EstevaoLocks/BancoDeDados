@@ -1,0 +1,261 @@
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 168
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use etecmcm2;
+Database changed
+MariaDB [etecmcm2]> select * from produto;
++------------+----------------------------------------+--------------+---------------+------------------------------+----------------------------+----------------+
+| id_produto | nome_produto                           | qtde_produto | preco_produto | marca_produto                | fk_categorias_id_categoria | unidade_medida |
++------------+----------------------------------------+--------------+---------------+------------------------------+----------------------------+----------------+
+|          1 | Sabão em pó                            |            3 |         25.00 | OMO                          |                          2 | un             |
+|          2 | Queijo mussarela                       |           10 |         32.00 | Presidente                   |                          1 | kg             |
+|          3 | Mortadela Bologna Defumada             |            5 |          7.20 | Perdigão                     |                          3 | kg             |
+|          4 | Iogurte Natural                        |          124 |          3.79 | Vigor                        |                          1 | un             |
+|          5 | Milho Verde em Conserva                |          142 |          3.29 | Quero                        |                          4 | un             |
+|          6 | Maçã Gala                              |           10 |          7.50 | Produto de Agricultura Local |                          6 | kg             |
+|          7 | Presunto Parma                         |          200 |         28.90 | Seara                        |                          3 | kg             |
+|          8 | Alcatra                                |            1 |         35.90 | Friboi                       |                          5 | kg             |
+|          9 | Detergente Líquido Neutro              |           49 |          2.99 | Ypê                          |                          2 | un             |
+|         10 | Sardinha em Óleo                       |           85 |          6.50 | Coqueiro                     |                          4 | un             |
+|         11 | Filé de Peito de Frango Congelado      |            5 |         18.90 | Seara                        |                          5 | kg             |
+|         21 | Cenoura                                |           15 |          3.20 | Fazenda Natural              |                          6 | kg             |
+|         22 | Liquidificador 800W com 12 velocidades |            5 |        199.00 | Mondial                      |                          8 | un             |
+|         23 | Sabonete Líquido Hidratante            |           25 |         14.90 | Dove                         |                          7 | un             |
+|         30 | Desodorante Aerossol Antitranspirante  |           19 |         11.50 | Rexona                       |                          7 | un             |
+|         31 | Smart TV 50" LED 4K UHD                |            2 |       2499.00 | Samsung                      |                          8 | un             |
+|         32 | Refrigerante Coca-Cola 2L              |           24 |          8.90 | Coca-Cola                    |                          9 | un             |
+|         33 | Lasanha Bolonhesa Congelada 600g       |         7200 |         16.90 | Sadia                        |                         11 | g              |
+|         34 | Suco de Laranja Integral 1L            |           36 |          8.50 | Del Valle                    |                          9 | un             |
+|         35 | Nuggets de Frango                      |           17 |         24.50 | Seara                        |                         11 | kg             |
++------------+----------------------------------------+--------------+---------------+------------------------------+----------------------------+----------------+
+20 rows in set (0.000 sec)
+
+MariaDB [etecmcm2]> select nome_produto, preco_produto from produto;
++----------------------------------------+---------------+
+| nome_produto                           | preco_produto |
++----------------------------------------+---------------+
+| Sabão em pó                            |         25.00 |
+| Queijo mussarela                       |         32.00 |
+| Mortadela Bologna Defumada             |          7.20 |
+| Iogurte Natural                        |          3.79 |
+| Milho Verde em Conserva                |          3.29 |
+| Maçã Gala                              |          7.50 |
+| Presunto Parma                         |         28.90 |
+| Alcatra                                |         35.90 |
+| Detergente Líquido Neutro              |          2.99 |
+| Sardinha em Óleo                       |          6.50 |
+| Filé de Peito de Frango Congelado      |         18.90 |
+| Cenoura                                |          3.20 |
+| Liquidificador 800W com 12 velocidades |        199.00 |
+| Sabonete Líquido Hidratante            |         14.90 |
+| Desodorante Aerossol Antitranspirante  |         11.50 |
+| Smart TV 50" LED 4K UHD                |       2499.00 |
+| Refrigerante Coca-Cola 2L              |          8.90 |
+| Lasanha Bolonhesa Congelada 600g       |         16.90 |
+| Suco de Laranja Integral 1L            |          8.50 |
+| Nuggets de Frango                      |         24.50 |
++----------------------------------------+---------------+
+20 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> select * from produto where marca_produto = 'Seara';
++------------+-----------------------------------+--------------+---------------+---------------+----------------------------+----------------+
+| id_produto | nome_produto                      | qtde_produto | preco_produto | marca_produto | fk_categorias_id_categoria | unidade_medida |
++------------+-----------------------------------+--------------+---------------+---------------+----------------------------+----------------+
+|          7 | Presunto Parma                    |          200 |         28.90 | Seara         |                          3 | kg             |
+|         11 | Filé de Peito de Frango Congelado |            5 |         18.90 | Seara         |                          5 | kg             |
+|         35 | Nuggets de Frango                 |           17 |         24.50 | Seara         |                         11 | kg             |
++------------+-----------------------------------+--------------+---------------+---------------+----------------------------+----------------+
+3 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> select * from produto where preco_produto > 20;
++------------+----------------------------------------+--------------+---------------+---------------+----------------------------+----------------+
+| id_produto | nome_produto                           | qtde_produto | preco_produto | marca_produto | fk_categorias_id_categoria | unidade_medida |
++------------+----------------------------------------+--------------+---------------+---------------+----------------------------+----------------+
+|          1 | Sabão em pó                            |            3 |         25.00 | OMO           |                          2 | un             |
+|          2 | Queijo mussarela                       |           10 |         32.00 | Presidente    |                          1 | kg             |
+|          7 | Presunto Parma                         |          200 |         28.90 | Seara         |                          3 | kg             |
+|          8 | Alcatra                                |            1 |         35.90 | Friboi        |                          5 | kg             |
+|         22 | Liquidificador 800W com 12 velocidades |            5 |        199.00 | Mondial       |                          8 | un             |
+|         31 | Smart TV 50" LED 4K UHD                |            2 |       2499.00 | Samsung       |                          8 | un             |
+|         35 | Nuggets de Frango                      |           17 |         24.50 | Seara         |                         11 | kg             |
++------------+----------------------------------------+--------------+---------------+---------------+----------------------------+----------------+
+7 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> select * from produto where qtde_produto <= 30;
++------------+----------------------------------------+--------------+---------------+------------------------------+----------------------------+----------------+
+| id_produto | nome_produto                           | qtde_produto | preco_produto | marca_produto                | fk_categorias_id_categoria | unidade_medida |
++------------+----------------------------------------+--------------+---------------+------------------------------+----------------------------+----------------+
+|          1 | Sabão em pó                            |            3 |         25.00 | OMO                          |                          2 | un             |
+|          2 | Queijo mussarela                       |           10 |         32.00 | Presidente                   |                          1 | kg             |
+|          3 | Mortadela Bologna Defumada             |            5 |          7.20 | Perdigão                     |                          3 | kg             |
+|          6 | Maçã Gala                              |           10 |          7.50 | Produto de Agricultura Local |                          6 | kg             |
+|          8 | Alcatra                                |            1 |         35.90 | Friboi                       |                          5 | kg             |
+|         11 | Filé de Peito de Frango Congelado      |            5 |         18.90 | Seara                        |                          5 | kg             |
+|         21 | Cenoura                                |           15 |          3.20 | Fazenda Natural              |                          6 | kg             |
+|         22 | Liquidificador 800W com 12 velocidades |            5 |        199.00 | Mondial                      |                          8 | un             |
+|         23 | Sabonete Líquido Hidratante            |           25 |         14.90 | Dove                         |                          7 | un             |
+|         30 | Desodorante Aerossol Antitranspirante  |           19 |         11.50 | Rexona                       |                          7 | un             |
+|         31 | Smart TV 50" LED 4K UHD                |            2 |       2499.00 | Samsung                      |                          8 | un             |
+|         32 | Refrigerante Coca-Cola 2L              |           24 |          8.90 | Coca-Cola                    |                          9 | un             |
+|         35 | Nuggets de Frango                      |           17 |         24.50 | Seara                        |                         11 | kg             |
++------------+----------------------------------------+--------------+---------------+------------------------------+----------------------------+----------------+
+13 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> select nome_produto, preco_produto from produto order by preco_produto asc limit 5;
++---------------------------+---------------+
+| nome_produto              | preco_produto |
++---------------------------+---------------+
+| Detergente Líquido Neutro |          2.99 |
+| Cenoura                   |          3.20 |
+| Milho Verde em Conserva   |          3.29 |
+| Iogurte Natural           |          3.79 |
+| Sardinha em Óleo          |          6.50 |
++---------------------------+---------------+
+5 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> select nome_produto, preco_produto from produto order by preco_produto desc limit 5;
++----------------------------------------+---------------+
+| nome_produto                           | preco_produto |
++----------------------------------------+---------------+
+| Smart TV 50" LED 4K UHD                |       2499.00 |
+| Liquidificador 800W com 12 velocidades |        199.00 |
+| Alcatra                                |         35.90 |
+| Queijo mussarela                       |         32.00 |
+| Presunto Parma                         |         28.90 |
++----------------------------------------+---------------+
+5 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> select count(*) as total_produtos from produto;
++----------------+
+| total_produtos |
++----------------+
+|             20 |
++----------------+
+1 row in set (0.001 sec)
+
+MariaDB [etecmcm2]> select avg(preco_produto) as preco_medio from produto;
++-------------+
+| preco_medio |
++-------------+
+|  147.918500 |
++-------------+
+1 row in set (0.001 sec)
+
+MariaDB [etecmcm2]> select nome_produto, qtde_produto from produto order by qtde_produto desc limit 1;
++----------------------------------+--------------+
+| nome_produto                     | qtde_produto |
++----------------------------------+--------------+
+| Lasanha Bolonhesa Congelada 600g |         7200 |
++----------------------------------+--------------+
+1 row in set (0.001 sec)
+
+MariaDB [etecmcm2]> select nome_produto, qtde_produto from produto order by qtde_produto desc limit 2;
++----------------------------------+--------------+
+| nome_produto                     | qtde_produto |
++----------------------------------+--------------+
+| Lasanha Bolonhesa Congelada 600g |         7200 |
+| Presunto Parma                   |          200 |
++----------------------------------+--------------+
+2 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> SELECT p.nome_produto, c.nome_cat FROM produto p JOIN categorias c ON p.fk_categorias_id_categoria = c.id_categoria;
++----------------------------------------+-------------------+
+| nome_produto                           | nome_cat          |
++----------------------------------------+-------------------+
+| Queijo mussarela                       | Lacticíneos       |
+| Iogurte Natural                        | Lacticíneos       |
+| Sabão em pó                            | Limpeza           |
+| Detergente Líquido Neutro              | Limpeza           |
+| Mortadela Bologna Defumada             | Frios             |
+| Presunto Parma                         | Frios             |
+| Milho Verde em Conserva                | Enlatados         |
+| Sardinha em Óleo                       | Enlatados         |
+| Alcatra                                | Carnes            |
+| Filé de Peito de Frango Congelado      | Carnes            |
+| Maçã Gala                              | Hortifrut         |
+| Cenoura                                | Hortifrut         |
+| Sabonete Líquido Hidratante            | Perfumaria        |
+| Desodorante Aerossol Antitranspirante  | Perfumaria        |
+| Liquidificador 800W com 12 velocidades | Eletroeletrônicos |
+| Smart TV 50" LED 4K UHD                | Eletroeletrônicos |
+| Refrigerante Coca-Cola 2L              | Bebidas           |
+| Suco de Laranja Integral 1L            | Bebidas           |
+| Lasanha Bolonhesa Congelada 600g       | Congelados        |
+| Nuggets de Frango                      | Congelados        |
++----------------------------------------+-------------------+
+20 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> select p.nome_produto, p.marca_produto, p.preco_produto from produto p join categorias c on p.fk_categorias_id_categoria = c.id_categoria where c.nome_cat = 'Lacticíneos';
++------------------+---------------+---------------+
+| nome_produto     | marca_produto | preco_produto |
++------------------+---------------+---------------+
+| Queijo mussarela | Presidente    |         32.00 |
+| Iogurte Natural  | Vigor         |          3.79 |
++------------------+---------------+---------------+
+2 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> select c.nome_cat, count(*) as total_produtos from produto p join categorias c on p.fk_categorias_id_categoria = c.id_categoria group by c.nome_cat;
++-------------------+----------------+
+| nome_cat          | total_produtos |
++-------------------+----------------+
+| Bebidas           |              2 |
+| Carnes            |              2 |
+| Congelados        |              2 |
+| Eletroeletrônicos |              2 |
+| Enlatados         |              2 |
+| Frios             |              2 |
+| Hortifrut         |              2 |
+| Lacticíneos       |              2 |
+| Limpeza           |              2 |
+| Perfumaria        |              2 |
++-------------------+----------------+
+10 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> select * from produto where preco_produto between 10 and 20;
++------------+---------------------------------------+--------------+---------------+---------------+----------------------------+----------------+
+| id_produto | nome_produto                          | qtde_produto | preco_produto | marca_produto | fk_categorias_id_categoria | unidade_medida |
++------------+---------------------------------------+--------------+---------------+---------------+----------------------------+----------------+
+|         11 | Filé de Peito de Frango Congelado     |            5 |         18.90 | Seara         |                          5 | kg             |
+|         23 | Sabonete Líquido Hidratante           |           25 |         14.90 | Dove          |                          7 | un             |
+|         30 | Desodorante Aerossol Antitranspirante |           19 |         11.50 | Rexona        |                          7 | un             |
+|         33 | Lasanha Bolonhesa Congelada 600g      |         7200 |         16.90 | Sadia         |                         11 | g              |
++------------+---------------------------------------+--------------+---------------+---------------+----------------------------+----------------+
+4 rows in set (0.001 sec)
+
+MariaDB [etecmcm2]> select * from produto where nome_produto like 'P%';
++------------+----------------+--------------+---------------+---------------+----------------------------+----------------+
+| id_produto | nome_produto   | qtde_produto | preco_produto | marca_produto | fk_categorias_id_categoria | unidade_medida |
++------------+----------------+--------------+---------------+---------------+----------------------------+----------------+
+|          7 | Presunto Parma |          200 |         28.90 | Seara         |                          3 | kg             |
++------------+----------------+--------------+---------------+---------------+----------------------------+----------------+
+1 row in set (0.001 sec)
+
+MariaDB [etecmcm2]> select distinct marca_produto from produto;
++------------------------------+
+| marca_produto                |
++------------------------------+
+| OMO                          |
+| Presidente                   |
+| Perdigão                     |
+| Vigor                        |
+| Quero                        |
+| Produto de Agricultura Local |
+| Seara                        |
+| Friboi                       |
+| Ypê                          |
+| Coqueiro                     |
+| Fazenda Natural              |
+| Mondial                      |
+| Dove                         |
+| Rexona                       |
+| Samsung                      |
+| Coca-Cola                    |
+| Sadia                        |
+| Del Valle                    |
++------------------------------+
+18 rows in set (0.001 sec)
